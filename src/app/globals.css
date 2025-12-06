@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-poppins: var(--font-poppins), sans-serif;
+}
+
+@layer base {
+  body {
+    @apply font-poppins;
+  }
+}
