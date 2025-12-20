@@ -8,16 +8,16 @@ const typographyVariants = cva(
   {
     variants: {
       variant: {
-        h1: "text-4xl font-extrabold lg:text-5xl",
-        h2: "text-3xl font-semibold first:mt-0",
-        h3: "text-2xl font-semibold",
-        h4: "text-xl font-semibold",
-        p: "text-base leading-7 [&:not(:first-child)]:mt-6",
-        blockquote: "mt-6 border-l-2 pl-6 italic",
-        code: "relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold",
-        lead: "text-xl text-muted-foreground",
-        small: "text-sm font-medium leading-none",
-        span: "text-base",
+        h1: "",
+        h2: "first:mt-0",
+        h3: "",
+        h4: "",
+        p: "leading-7 [&:not(:first-child)]:mt-6",
+        blockquote: "mt-6 border-l-2 pl-6",
+        code: "relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono",
+        lead: "text-muted-foreground",
+        small: "leading-none",
+        span: "",
       },
       size: {
         default: "",
@@ -57,6 +57,88 @@ const typographyVariants = cva(
       italic: false,
       align: "left",
     },
+    compoundVariants: [
+      {
+        variant: "h1",
+        size: "default",
+        class: "text-4xl lg:text-5xl",
+      },
+      {
+        variant: "h1",
+        weight: "default",
+        class: "font-extrabold",
+      },
+      {
+        variant: "h2",
+        size: "default",
+        class: "text-3xl",
+      },
+      {
+        variant: "h2",
+        weight: "default",
+        class: "font-semibold",
+      },
+      {
+        variant: "h3",
+        size: "default",
+        class: "text-2xl",
+      },
+      {
+        variant: "h3",
+        weight: "default",
+        class: "font-semibold",
+      },
+      {
+        variant: "h4",
+        size: "default",
+        class: "text-xl",
+      },
+      {
+        variant: "h4",
+        weight: "default",
+        class: "font-semibold",
+      },
+      {
+        variant: "p",
+        size: "default",
+        class: "text-base",
+      },
+      {
+        variant: "blockquote",
+        italic: false,
+        class: "italic",
+      },
+      {
+        variant: "code",
+        size: "default",
+        class: "text-sm",
+      },
+      {
+        variant: "code",
+        weight: "default",
+        class: "font-semibold",
+      },
+      {
+        variant: "lead",
+        size: "default",
+        class: "text-xl",
+      },
+      {
+        variant: "small",
+        size: "default",
+        class: "text-sm",
+      },
+      {
+        variant: "small",
+        weight: "default",
+        class: "font-medium",
+      },
+      {
+        variant: "span",
+        size: "default",
+        class: "text-base",
+      },
+    ],
   },
 );
 
@@ -167,7 +249,7 @@ export default function Typography<
   let finalVariant = variant;
 
   if (!finalVariant && typeof as === "string") {
-    // @ts-ignore - Verificação segura em runtime
+    // @ts-expect-error - Verificação segura em runtime
     if (validVariants.includes(as)) {
       finalVariant = as as any;
     }

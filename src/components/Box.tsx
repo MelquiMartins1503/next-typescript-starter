@@ -30,6 +30,7 @@ export const boxVariants = cva("flex", {
       0: "gap-0",
       1: "gap-1", // xs (4px)
       2: "gap-2", // sm (8px)
+      3: "gap-3", // md (12px)
       4: "gap-4", // md (16px)
       6: "gap-6", // lg (24px)
       8: "gap-8",
@@ -88,7 +89,7 @@ type BoxProps<T extends AllowedTags | ElementType> = {
 } & Omit<ComponentPropsWithoutRef<T>, "as"> &
   VariantProps<typeof boxVariants>;
 
-export default function Box<T extends AllowedTags | ElementType>({
+export default function Box<T extends AllowedTags | ElementType = "div">({
   as,
   children,
   className,

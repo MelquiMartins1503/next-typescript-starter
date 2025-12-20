@@ -9,14 +9,16 @@
     "start": "next start",
     "lint": "biome check",
     "format": "biome format --write",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prisma:build": "cat prisma/schema.prisma prisma/models/*.prisma > prisma/temp.prisma",
+    "prisma:generate": "npm run prisma:build && npx prisma generate --schema=prisma/temp.prisma && rm prisma/temp.prisma",
+    "prisma:migrate:dev": "npm run prisma:build && npx prisma migrate dev --schema=prisma/temp.prisma && rm prisma/temp.prisma"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
-    "@prisma/adapter-better-sqlite3": "^7.0.1",
+    "@prisma/adapter-pg": "^7.2.0",
     "@prisma/client": "^7.0.1",
     "axios": "^1.13.2",
-    "better-sqlite3": "^12.4.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^1.2.1",
     "next": "16.0.3",
@@ -31,7 +33,6 @@
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@tailwindcss/postcss": "^4",
-    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

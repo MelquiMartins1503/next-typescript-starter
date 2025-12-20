@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const axiosConfig = axios.create({
+const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-export default axiosConfig;
+export default apiClient;
