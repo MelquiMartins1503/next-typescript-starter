@@ -1,5 +1,11 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import type { ComponentPropsWithoutRef, ElementType, JSX } from "react";
+import {
+  type ComponentPropsWithoutRef,
+  type ElementType,
+  type ForwardedRef,
+  forwardRef,
+  type JSX,
+} from "react";
 import { cn } from "@/lib/cn";
 
 export const boxVariants = cva("flex", {
@@ -84,33 +90,42 @@ export type ExcludeTags =
 
 type AllowedTags = Exclude<keyof JSX.IntrinsicElements, ExcludeTags>;
 
-type BoxProps<T extends AllowedTags | ElementType> = {
+export type BoxProps<T extends AllowedTags | ElementType = "div"> = {
   as?: T;
 } & Omit<ComponentPropsWithoutRef<T>, "as"> &
   VariantProps<typeof boxVariants>;
 
-export default function Box<T extends AllowedTags | ElementType = "div">({
-  as,
-  children,
-  className,
-  alignItems,
-  flexDirection,
-  justifyContent,
-  gap,
-  wrap,
-  ...rest
-}: BoxProps<T>) {
-  const BoxComponent = as || "div";
+export const Box = forwardRef(
+  <T extends AllowedTags | ElementType = "div">(
+    {
+      as,
+      children,
+      className,
+      alignItems,
+      flexDirection,
+      justifyContent,
+      gap,
+      wrap,
+      ...rest
+    }: BoxProps<T>,
+    // biome-ignore lint/suspicious/noExplicitAny: Ref needs to be generic for polymorphism
+    ref: ForwardedRef<any>,
+  ) => {
+    const BoxComponent = as || "div";
 
-  return (
-    <BoxComponent
-      className={cn(
-        boxVariants({ alignItems, flexDirection, justifyContent, gap, wrap }),
-        className,
-      )}
-      {...rest}
-    >
-      {children}
-    </BoxComponent>
-  );
-}
+    return (
+      <BoxComponent
+        ref={ref}
+        className={cn(
+          boxVariants({ alignItems, flexDirection, justifyContent, gap, wrap }),
+          className,
+        )}
+        {...rest}
+      >
+        {children}
+      </BoxComponent>
+    );
+  },
+);
+
+Box.displayName = "Box";
