@@ -191,18 +191,22 @@ export type TypographyProps<T extends AllowedTags | ElementType = "span"> = {
   VariantProps<typeof typographyVariants>;
 
 export const Typography = forwardRef(
-  <T extends AllowedTags | ElementType = "span">({
-    as,
-    variant,
-    size,
-    weight,
-    italic,
-    align,
-    leading,
-    className,
-    children,
-    ...rest
-  }: TypographyProps<T>) => {
+  <T extends AllowedTags | ElementType = "span">(
+    {
+      as,
+      variant,
+      size,
+      weight,
+      italic,
+      align,
+      leading,
+      className,
+      children,
+      ...rest
+    }: TypographyProps<T>,
+    // biome-ignore lint/suspicious/noExplicitAny: Ref needs to be generic for polymorphism
+    ref: React.ForwardedRef<any>,
+  ) => {
     const Component = as || "span";
 
     let finalVariant = variant;
@@ -219,6 +223,7 @@ export const Typography = forwardRef(
     return (
       <Component
         {...rest}
+        ref={ref}
         className={cn(
           typographyVariants({
             variant: finalVariant,
@@ -235,4 +240,6 @@ export const Typography = forwardRef(
       </Component>
     );
   },
-);
+) as <T extends AllowedTags | ElementType = "span">(
+  props: TypographyProps<T> & { ref?: React.Ref<Element> },
+) => React.JSX.Element;

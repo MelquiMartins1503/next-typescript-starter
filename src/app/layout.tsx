@@ -1,11 +1,11 @@
 import type React from "react";
 import "./globals.css";
 import { Poppins } from "next/font/google";
+import { Box } from "@/components/Box";
 import { cn } from "@/lib/cn";
 import NextThemeProvider, {
   NextThemeTrigger,
 } from "@/providers/NextThemeProvider";
-import Box from "@/components/Box";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],

@@ -1,8 +1,8 @@
 "use client";
 
-import Box from "@/components/Box";
-import { useTheme, ThemeProvider } from "next-themes";
-import { useState, useEffect } from "react";
+import { ThemeProvider, useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { Box } from "@/components/Box";
 
 export default function NextThemeProvider({
   children,

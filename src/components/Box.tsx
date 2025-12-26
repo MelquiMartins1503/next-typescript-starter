@@ -95,7 +95,7 @@ export type BoxProps<T extends AllowedTags | ElementType = "div"> = {
 } & Omit<ComponentPropsWithoutRef<T>, "as"> &
   VariantProps<typeof boxVariants>;
 
-export const Box = forwardRef(
+const BoxComponent = forwardRef(
   <T extends AllowedTags | ElementType = "div">(
     {
       as,
@@ -128,4 +128,10 @@ export const Box = forwardRef(
   },
 );
 
-Box.displayName = "Box";
+BoxComponent.displayName = "Box";
+
+export const Box = BoxComponent as <
+  T extends AllowedTags | ElementType = "div",
+>(
+  props: BoxProps<T> & { ref?: React.Ref<Element> },
+) => React.JSX.Element;

@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import Box from "@/components/Box";
-import Typography from "@/components/Typography";
+import { Box } from "@/components/Box";
+import { Typography } from "@/components/Typography";
 
 const Page: NextPage = () => {
   return (
